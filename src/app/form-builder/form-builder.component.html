@@ -1,0 +1,54 @@
+<p>
+  form-builder works!
+</p>
+
+<form [formGroup]='theFormGroup' (ngSubmit) = "OnFormSubmitted(theFormGroup.value)">
+ 
+ <div>
+  sample for form controls bound to the existing formControl 
+  <input type="text" [formControl]="theFormGroup.controls['name']" >
+  <input type="text" [formControl]="theFormGroup.controls['animal']" >
+</div>
+  
+ 
+<div>
+  sample dynamically added formControl with known name to the existing formGroup
+  <input type="text" *ngIf="theFormGroup.controls['dyn']" [formControl]="theFormGroup.controls['dyn']" >
+</div>
+ 
+<div>
+  dynamically added controls to the existing formControl 
+  <p>dynamicControlIndexes : {{dynamicControlIndexes}} </p>
+  <div *ngFor="let i of dynamicControlIndexes">
+    <span>{{i.toString()}}</span>
+    <input type="text" *ngIf='theFormGroup.controls[i.toString()]' [formControl]='theFormGroup.controls[i.toString()]'>
+  </div>
+</div>
+
+
+<div>
+    dynamically added controls to the existing formControl with concatenated key
+    
+    <div *ngFor="let i of dynamicControlIndexes">
+      <span>{{i.toString()}}</span>
+      <input type="text" *ngIf='theFormGroup.controls["item"+i.toString()]' [formControl]='theFormGroup.controls["item"+i.toString()]'>
+    </div>
+  </div>
+
+  
+<button type="submit">Submit</button>
+</form>
+
+
+
+<input type="text" #updatedName >
+<button (click)="UpdateName(updatedName.value)">Update name</button>
+
+
+
+
+
+<form [formGroup]="fg2" (ngSubmit)="fg2Submittion(fg2)">
+  <input type="text" [formControl]="fg2.controls['textInput']">
+  <button type="submit">Submit fg2</button>
+</form>

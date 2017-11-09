@@ -1,0 +1,151 @@
+<p>
+  simple-form works!
+</p>
+
+
+
+
+
+
+
+
+
+
+<div>
+  <form #myFormGroup="ngForm" (ngSubmit)="onFormSubmit(myFormGroup.value)">
+    <div>
+      <label for="productSku">SKU</label>
+      <input type="text" id="productSku" name="theProductSKU" ngModel/>
+    </div>
+    <div>
+      <label for="productPriceInput">Price: </label>
+      <input type="text" id="productPriceInput" name="productPrice" ngModel>
+    </div>
+
+    <div>
+      <label for="availableOnPreOrderFlagInput">Is Available on Pre-Order</label>
+      <input type="checkbox" id="availableOnPreOrderFlagInput" name="availableOnPreOrderFlag" ngModel>
+    </div>
+
+    <div>
+      <label for="productColorInput">Product Color: </label>
+
+      <input type="color" id="productColorInput" name="colorPick" ngModel>
+    </div>
+
+    <div>
+      <label for="availableFromInput">Available From date: </label>
+
+      <input type="date" id="availableFromInput" name="availableDateFrom" ngModel>
+    </div>
+
+    <div>
+      <label for="availableToInput">Available to dateTime: </label>
+
+      <input type="datetime" id="availableToInput" name="availableTo" ngModel>
+    </div>
+
+
+    <div>
+      <label for="availableToInput2">Available to dateTime2: </label>
+
+      <input type="datetime-local" id="availableToInput2" name="availableTo2" ngModel>
+    </div>
+
+
+    <div>
+      <label for="emailInput">Email: </label>
+
+      <input type="email" id="emailInput" name="email" ngModel>
+    </div>
+
+
+
+    <div>
+      <label for="fileInput">File: </label>
+
+      <input type="file" id="fileInput" name="file" ngModel>
+    </div>
+
+
+    <div>
+      <label for="theImageInput">Image: </label>
+
+      <input type="image" id="theImageInput" name="theImage" ngModel>
+    </div>
+
+    <div>
+      <label for="themonthInput">Month: </label>
+
+      <input type="month" id="themonthInput" name="themonth" ngModel>
+    </div>
+
+
+    <div>
+      <label for="numberInput">number: </label>
+
+      <input type="number" id="numberInput" name="theNumber" ngModel>
+    </div>
+
+    <div>
+      <label for="passwordInput">password: </label>
+
+      <input type="password" id="passwordInput" name="thepassword" ngModel>
+    </div>
+
+    <div>
+      Gender
+      <div>
+        <label for="radioGenderInputMale">Male: </label>
+        <input type="radio" id="radioGenderInputMale" name="radioGender" value="male" ngModel>
+      </div>
+      <div>
+        <label for="radioGenderInputMale">Female: </label>
+        <input type="radio" id="radioGenderInput" name="radioGender" value="female" ngModel>
+      </div>
+
+
+      <div>
+        <label for="radioGenderInputMale">n/a: </label>
+        <input type="radio" id="radioGenderInput" name="radioGender" value="something else" ngModel>
+      </div>
+    </div>
+
+    <div>
+      <label for="rangeInput">range: </label>
+      <input type="range" id="rangeInput" name="rangeTest" ngModel>
+    </div>
+
+
+    <div>
+      <label for="searchInput">search: </label>
+      <input type="search" id="searchInput" name="searchTest" ngModel>
+    </div>
+
+
+    <div>
+      <label for="telInput">tel: </label>
+      <input type="tel" id="telInput" name="telTest" ngModel>
+    </div>
+
+
+
+    <div>
+      <label for="timeInput">time: </label>
+      <input type="time" id="timeInput" name="timeTest" ngModel>
+    </div>
+
+
+    <div>
+      <label for="urlInput">url: </label>
+      <input type="url" id="urlInput" name="urlTest" ngModel>
+    </div>
+
+    <div>
+      <label for="weekINput">url: </label>
+      <input type="week" id="weekINput" name="weekTest" ngModel>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>

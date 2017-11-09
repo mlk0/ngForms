@@ -1,0 +1,9 @@
+.requiredNotFilled {
+    border-color: red;
+    font-weight: bold;
+    color: red
+}
+
+.mediumFont{
+    font-size: medium;
+}

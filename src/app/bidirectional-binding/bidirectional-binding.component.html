@@ -1,0 +1,24 @@
+<p>
+  bidirectional-binding works!
+</p>
+
+
+<form [formGroup]='fg' (ngSubmit)="OnSubmitForm(fg.value)">
+  <div>
+    <label for="makeId">Make : </label>
+    <input id="makeId" [formControl]="fg.controls['Model']"
+    [(ngModel)]="make"
+    >
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+<div>
+  <label for="insideFormId">Inside Form</label>
+  <input id="insideFormId" type="text"  [(ngModel)]="make" [ngModelOptions]="{standalone:true}"> 
+</div>
+</form>
+<div>
+  <label for="outsideFormId">Outside Form</label>
+<input id="outsideFormId" type="text"   [(ngModel)]="make"> <!-- [ngModelOptions]="{standalone: true}" -->
+</div>

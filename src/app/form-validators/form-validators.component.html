@@ -1,0 +1,39 @@
+<p>
+  form-validators works!
+</p>
+<div class="mediumFont">
+<form [formGroup] = 'fg' (ngSubmit)="OnFormSubmit(fg.value)">
+  <div>
+    <label for="nameInput">Name:</label>
+    <input type="text" id="nameInput" 
+           [formControl]="fg.controls['name']"
+           [ngClass]="{'requiredNotFilled': (!fg.controls['name'].valid && fg.controls['name'].dirty)}"
+           >
+     <p *ngIf="!fg.controls['name'].valid && fg.controls['name'].dirty" class="requiredNotFilled">issue(s) with the name field: </p>
+     <p *ngIf="fg.controls['name'].dirty && fg.controls['name'].hasError('required')" class="requiredNotFilled">name field is required</p>
+    </div>
+  <div>
+    <label for="ageInput">Age:</label>
+    <input type="text" id="ageInput" 
+           [formControl]="fg.controls['age']">
+           <p *ngIf="fg.controls['age'].hasError('required')">Age is required</p>
+           <p *ngIf="fg.controls['age'].hasError('isEven')">Age must be an even number</p>
+           
+     
+  </div>
+
+  <div>
+    <label for="surnameInput">Surname:</label>
+    <input type="text" id="surnameInput" [formControl]="fg.controls['surname']" name="surname" [ngClass]="{requiredNotFilled : fg.controls['surname'].hasError('startsWithUpperCase')}">
+    <p *ngIf="fg.controls['surname'].hasError('startsWithUpperCase')" [ngClass]="{requiredNotFilled : fg.controls['surname'].hasError('startsWithUpperCase')}"  >Surname must start with upper case letter.</p>
+  </div>
+
+  <button type="submit">Submit</button>
+
+  <div *ngIf="fg.dirty && !fg.valid">some of the required fields are not populated.</div>
+  <p *ngIf="fg.hasError('required','name')" >name is required in the form</p>
+<ul>
+  <li *ngFor="let error of fg.errors">{{error}}</li>
+</ul>
+</form>
+</div>
