@@ -1,39 +1,100 @@
 <p>
-  form-validators works!
+  form-validators works! <i class="fa fa-spinner fa-spin"></i>
 </p>
 <div class="mediumFont">
-<form [formGroup] = 'fg' (ngSubmit)="OnFormSubmit(fg.value)">
-  <div>
-    <label for="nameInput">Name:</label>
-    <input type="text" id="nameInput" 
-           [formControl]="fg.controls['name']"
-           [ngClass]="{'requiredNotFilled': (!fg.controls['name'].valid && fg.controls['name'].dirty)}"
-           >
-     <p *ngIf="!fg.controls['name'].valid && fg.controls['name'].dirty" class="requiredNotFilled">issue(s) with the name field: </p>
-     <p *ngIf="fg.controls['name'].dirty && fg.controls['name'].hasError('required')" class="requiredNotFilled">name field is required</p>
+  <p>
+    This is a demo for a form build through a FormBuilder</p>
+  <p>Sample for adding the control in the FormGroup.controls as a key-value pairs</p>
+  <p>Sample for declaration/setup of some of the FormControl instance through the FormBuilder.control and adding them later
+    in teh FormBuilder.group collection </p>
+  <p>Valiatiors presented:</p>
+  <ul>
+    <li>standard validators such as 'required' associated to the formGroup instance</li>
+    <li>custom validator - ex: the first letter for the surname needs to be a capital one or the age needs to be even number...</li>
+    <li>two validators associated with a single FormGroup control - ex: age is both required and must be an even number</li>
+    <li>tracking the value change through the subscription to an observable stream of the valueChange event</li>
+    <li>controlling the submit button disabled state attribute on the form based on the validity of the entire form</li>
+    <li>inspecting if a specific formControl within the formGroup has a specific validation error with FormGroup.hasError('validation','formControlName')</li>
+  </ul>
+
+  <form [formGroup]='fg' (ngSubmit)="OnFormSubmit(fg.value)">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2">
+          <label for="nameInput">Name:</label>
+        </div>
+        <div class="col-md-2">
+          <input type="text" id="nameInput" [formControl]="fg.controls['name']" [ngClass]="{'requiredNotFilled': (!fg.controls['name'].valid && fg.controls['name'].dirty)}">
+
+        </div>
+        <div class="col-md-8">
+          <p *ngIf="!fg.controls['name'].valid && fg.controls['name'].dirty" class="requiredNotFilled">issue(s) with the name field: </p>
+          <p *ngIf="fg.controls['name'].dirty && fg.controls['name'].hasError('required')" class="requiredNotFilled">name field is required</p>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"><label for="ageInput">Age:</label></div>
+        <div class="col-md-2"><input type="text" id="ageInput" [formControl]="fg.controls['age']"></div>
+        <div class="col-md-8">
+          <p *ngIf="fg.controls['age'].hasError('required')">Age is required</p>
+          <p *ngIf="fg.controls['age'].hasError('isEven')">Age must be an even number</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          <label for="surnameInput">Surname:</label>
+
+        </div>
+        <div class="col-md-2">
+          <input type="text" id="surnameInput" [formControl]="fg.controls['surname']" name="surname" [ngClass]="{requiredNotFilled : fg.controls['surname'].hasError('startsWithUpperCase')}">
+
+        </div>
+        <div class="col-md-8">
+          <p *ngIf="fg.controls['surname'].hasError('startsWithUpperCase')" [ngClass]="{requiredNotFilled : fg.controls['surname'].hasError('startsWithUpperCase')}">Surname must start with upper case letter.</p>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+
+          <!-- various options for controlling the disabled state -->
+          <button type="submit" [disabled]="(!fg.valid)">Submit 2</button>
+
+          <!-- <button type="submit" [disabled]="!isFormValid()">Submit v1</button>
+          <button type="submit" [disabled]="(fg.dirty && !fg.valid)">Submit 2</button> -->
+
+
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md">
+          <span *ngIf="fg.dirty && !fg.valid">General Form Error: There are some validation errors, check if some of the required fields are not populated or if the individual special input requirements are satisfied.</span>
+          <ul>
+            <li *ngFor="let error of fg.errors">{{error}}</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md">
+          <span *ngIf="fg.hasError('required','name')">name is required in the form</span>
+
+        </div>
+
+      </div>
+
+
     </div>
-  <div>
-    <label for="ageInput">Age:</label>
-    <input type="text" id="ageInput" 
-           [formControl]="fg.controls['age']">
-           <p *ngIf="fg.controls['age'].hasError('required')">Age is required</p>
-           <p *ngIf="fg.controls['age'].hasError('isEven')">Age must be an even number</p>
-           
-     
-  </div>
 
-  <div>
-    <label for="surnameInput">Surname:</label>
-    <input type="text" id="surnameInput" [formControl]="fg.controls['surname']" name="surname" [ngClass]="{requiredNotFilled : fg.controls['surname'].hasError('startsWithUpperCase')}">
-    <p *ngIf="fg.controls['surname'].hasError('startsWithUpperCase')" [ngClass]="{requiredNotFilled : fg.controls['surname'].hasError('startsWithUpperCase')}"  >Surname must start with upper case letter.</p>
-  </div>
 
-  <button type="submit">Submit</button>
 
-  <div *ngIf="fg.dirty && !fg.valid">some of the required fields are not populated.</div>
-  <p *ngIf="fg.hasError('required','name')" >name is required in the form</p>
-<ul>
-  <li *ngFor="let error of fg.errors">{{error}}</li>
-</ul>
-</form>
+
+  </form>
 </div>
